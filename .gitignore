@@ -67,3 +67,8 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+# ignore datasets
+data/
+!data/README.md
+!data/.gitkeep
