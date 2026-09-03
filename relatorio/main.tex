@@ -1,0 +1,72 @@
+\documentclass[a4paper, 12pt, english, brazilian]{article}
+\usepackage{graphicx}
+
+\usepackage{imegoodies}
+\usepackage{imelooks}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\title{Relatório IC - Estruturas de Dados Probabilísticas e Compactas}
+\author{Bruno Rangel Pereira Tadim}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Esse projeto de pesquisa visa estudar os fundamentos de estruturas probabilísticas e compactas, 
+incluindo estruturas clássicas da área, suas respectivas vantagens e desvantagens, além de realizar implementações
+para experimentação empírica.
+
+\section{Entropia}
+A entropia de uma estrutura de dados é o limite mínimo de bits necessários para representar 
+todos os possíveis estados que essa estrutura pode assumir.
+
+A Teoria da Informação de Shannon nos diz que, se temos uma estrutura de dados com conjunto 
+de estados $U$, onde cada estado $u \in U$ possui probabilidade de ocorrência $\Pr(u)$, dada por uma função $\Pr : U \to [0, 1]$
+a entropia $\mathcal{H}(\Pr)$ é definida como:
+\[
+    \mathcal{H}(\Pr) = -\sum_{u \in U}{\Pr(u)\log\Pr(u)} = \sum_{u \in U}{\Pr(u)\log\frac{1}{\Pr(u)}}
+\]
+Denominamos esse valor como entropia de Shannon.
+
+Se a probabilidade de ocorrência for igual $\forall u \in U$, ou seja, $\Pr(u) = \frac{1}{|U|}$, 
+então o cálculo de $\mathcal{H}(\Pr)$ será
+
+\begin{align*}
+    \mathcal{H}(\Pr) &= -\sum_{u \in U}{\frac{1}{|U|}\log\frac{1}{|U|}} 
+    = \frac{1}{|U|} \left(-\sum_{u \in U}{\log\frac{1}{|U|}}\right)\\
+    &= \frac{1}{|U|} \left( -|U| \log\frac{1}{|U|} \right) = -\log\frac{1}{|U|} = \log|U|
+\end{align*}
+
+Chamamos o caso acima de \textit{worst-entropy} e o denotamos $\mathcal{H}_{wc}$, pois o maior valor de $\mathcal{H}$ é
+obtido quando a distribuição de probabilidade é uniforme.  Nesse caso, dizemos que o 
+conjunto $U$ é incompressível.
+
+Para representarmos os elementos do conjunto $U$, atribuímos um código binário a cada um deles.
+Se todos os códigos tiverem o mesmo tamanho $l$, então o número de bits necessários será 
+$\log|U| = \mathcal{H}_{wc}(U)$. Caso $l <\mathcal{H}_{wc}$, teríamos apenas $2^{l} < 2^{\mathcal{H}_{wc}}
+= 2^{\log|U|} = |U|$ códigos distintos, o que é insuficiente para representar todos os $|U|$ elementos.
+
+No entanto, caso tenhamos informações sobre a distribuição de probabilidade $\Pr$ associada a $U$, e ela não
+for uniforme, podemos reduzir essa quantidade. Considere um conjunto $U = \{u_1, u_2, u_3, u_4\}$,
+com probabilidades $\{0.6, 0.2, 0.15, 0.05\}$, respectivamente. A entropia nesse caso é $\mathcal{H}(U) = 
+0.6 \cdot \log\frac{1}{0.6} + 0.2 \cdot \log\frac{1}{0.2} 
++ 0.15 \cdot \log\frac{1}{0.15} + 0.05 \cdot \log\frac{1}{0.05} \approx 1.5332 < \log4 = 2 = \mathcal{H}_{wc}(U)$.
+
+Podemos atribuir o código \texttt{0} para $u_1$, \texttt{10} para $u_2$, \texttt{110} para $u_3$ e \texttt{111}
+para $u_4$. Dessa forma, o tamanho médio dos códigos será $0.6 \cdot 1 + 0.2 \cdot 2 + 0.15 \cdot 3 
++ 0.05 \cdot 3 = 1.6$ bits, o que é próximo da entropia mínima e menor que o pior caso.
+
+É importante que a codificação seja livre de prefixos, ou seja, nenhum código pode ser prefixo de outro, caso
+contrário, será impossível realizar a decodificação sem ambiguidades. Os códigos escolhidos acima são gerados
+pelo \textbf{algoritmo de Huffman}.
+
+\subsection{Algoritmo de Huffman}
+Dada uma distribuição de probabilidade $\Pr : \Sigma \to [0.0, 1.0]$, o algoritmo de huffman retorna um
+código de prefixo que minimiza o tamanho médio dos códigos
+
+\section{Referências}
+
+\end{document}
