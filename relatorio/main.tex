@@ -5,6 +5,10 @@
 \usepackage{imelooks}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{forest}
+\usepackage{tikz}
+\usepackage{float}
+\raggedbottom % Verificar isso
 
 \title{Relatório IC - Estruturas de Dados Probabilísticas e Compactas}
 \author{Bruno Rangel Pereira Tadim}
@@ -14,7 +18,7 @@
 
 \maketitle
 
-\section{Introduction}
+\section{Introdução}
 Esse projeto de pesquisa visa estudar os fundamentos de estruturas probabilísticas e compactas, 
 incluindo estruturas clássicas da área, suas respectivas vantagens e desvantagens, além de realizar implementações
 para experimentação empírica.
@@ -60,12 +64,96 @@ para $u_4$. Dessa forma, o tamanho médio dos códigos será $0.6 \cdot 1 + 0.2 
 + 0.05 \cdot 3 = 1.6$ bits, o que é próximo da entropia mínima e menor que o pior caso.
 
 É importante que a codificação seja livre de prefixos, ou seja, nenhum código pode ser prefixo de outro, caso
-contrário, será impossível realizar a decodificação sem ambiguidades. Os códigos escolhidos acima são gerados
-pelo \textbf{algoritmo de Huffman}.
+contrário, será impossível realizar a decodificação sem ambiguidades. Os códigos escolhidos acima foram gerados
+utilizando a \textbf{codificação de Huffman}.
 
-\subsection{Algoritmo de Huffman}
-Dada uma distribuição de probabilidade $\Pr : \Sigma \to [0.0, 1.0]$, o algoritmo de huffman retorna um
-código de prefixo que minimiza o tamanho médio dos códigos
+\subsection{Codificação de Huffman}
+A codificação de Huffman é um algoritmo que, dada uma distribuição de probabilidade $\Pr : \Sigma \to [0.0, 1.0]$, 
+retorna um código de prefixo que minimiza o tamanho médio dos códigos.
+
+O algoritmo opera de forma gulosa e transforma um conjunto de $|\Sigma|$ nós em uma árvore binária. Inicialmente, temos
+um nó isolado para cada símbolo $s \in \Sigma$, contendo como valor a sua respectiva probabilidade $\Pr(s)$. A cada passo, as duas raízes
+de menores probabilidades são mescladas, se tornando ambas filhas de uma nova raíz, que conterá como valor a soma
+dessas probabilidades.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        scale=0.76, transform shape,
+        tnode/.style={circle, draw, thick, minimum size=8.5mm, inner sep=0pt, font=\small},
+        leaf/.style={tnode, fill=gray!20},
+        edge from parent/.style={draw, thick},
+        lbl/.style={draw=none, fill=none, font=\footnotesize, inner sep=2pt},
+        level 1/.style={sibling distance=3cm, level distance=1.3cm},
+        level 2/.style={sibling distance=2cm, level distance=1.3cm},
+        level 3/.style={sibling distance=1.5cm, level distance=1.3cm}
+    ]
+
+    % Passo 1
+    \begin{scope}[xshift=0cm, yshift=0cm]
+        \node[draw=none, font=\bfseries] at (2.25, 1) {Passo 1: Floresta inicial};
+        \node[leaf, label=below:{$u_1$}] at (0,0) {0.6};
+        \node[leaf, label=below:{$u_2$}] at (1.5,0) {0.2};
+        \node[leaf, label=below:{$u_3$}] at (3,0) {0.15};
+        \node[leaf, label=below:{$u_4$}] at (4.5,0) {0.05};
+    \end{scope}
+
+    % Passo 2
+    \begin{scope}[xshift=8cm, yshift=0cm]
+        \node[draw=none, font=\bfseries] at (2.5, 1) {Passo 2: Mescla $u_3$ e $u_4$};
+        \node[leaf, label=below:{$u_1$}] at (0,0) {0.6};
+        \node[leaf, label=below:{$u_2$}] at (1.5,0) {0.2};
+        \node[tnode] at (3.75,0) {0.20}
+            child {node[leaf, label=below:{$u_3$}] {0.15} edge from parent node[left, lbl, xshift=-1pt] {0}}
+            child {node[leaf, label=below:{$u_4$}] {0.05} edge from parent node[right, lbl, xshift=1pt] {1}};
+    \end{scope}
+
+    % Passo 3
+    \begin{scope}[xshift=0cm, yshift=-4.5cm]
+        \node[draw=none, font=\bfseries] at (2.25, 1) {Passo 3: Mescla $u_2$ e o nó (0.20)};
+        \node[leaf, label=below:{$u_1$}] at (0,0) {0.6};
+        \node[tnode] at (3,0) {0.40}
+            child {node[leaf, label=below:{$u_2$}] {0.2} edge from parent node[left, lbl, xshift=-2pt] {0}}
+            child {node[tnode] {0.20}
+                child {node[leaf, label=below:{$u_3$}] {0.15} edge from parent node[left, lbl, xshift=-1pt] {0}}
+                child {node[leaf, label=below:{$u_4$}] {0.05} edge from parent node[right, lbl, xshift=1pt] {1}}
+            edge from parent node[right, lbl, xshift=2pt] {1}};
+    \end{scope}
+
+    % Passo 4
+    \begin{scope}[xshift=8cm, yshift=-4.5cm]
+        \node[draw=none, font=\bfseries] at (2.5, 1) {Passo 4: Mescla $u_1$ e o nó (0.4)};
+        \node[tnode] at (2,0) {1.0}
+            child {node[leaf, label=below:{$u_1$}] {0.6} edge from parent node[left, lbl, xshift=-3pt] {0}}
+            child {node[tnode] {0.40}
+                child {node[leaf, label=below:{$u_2$}] {0.2} edge from parent node[left, lbl, xshift=-2pt] {0}}
+                child {node[tnode] {0.20}
+                    child {node[leaf, label=below:{$u_3$}] {0.15} edge from parent node[left, lbl, xshift=-1pt] {0}}
+                    child {node[leaf, label=below:{$u_4$}] {0.05} edge from parent node[right, lbl, xshift=1pt] {1}}
+                edge from parent node[right, lbl, xshift=2pt] {1}}
+            edge from parent node[right, lbl, xshift=3pt] {1}};
+    \end{scope}
+
+    \end{tikzpicture}
+    \caption{Execução passo a passo do algoritmo de Huffman para o conjunto $U$.}
+    \label{fig:huffman_steps}
+\end{figure}
+
+A árvore final gerada pelo algoritmo é denominada \textit{árvore de Huffman}. Partindo da raíz da árvore, interpretamos 
+ir para esquerda como \texttt{0} e ir para direita como \texttt{1}. Dessa forma, o caminho da raíz da árvore até uma folha
+$s \in \Sigma$ representa o código referente a $s$, $\mathcal{C}(s)$. A árvore de Huffman minimiza o tamanho médio dos
+códigos, dado por $\sum_{s \in \Sigma}{\Pr(s)l(s)}$.
+
+Ao implementarmos o algoritmo, podemos inserir os elementos em uma lista de prioridade (\textit{Min-Heap}), ordenada
+pelas probabilidades. A cada iteração, extraímos os dois nós de peso mínimo, criamos um novo nó interno com a soma 
+de suas probabilidades e o reinserimos na fila. Como cada operação de extração e inserção na fila de prioridade 
+tem custo $\mathcal{O}(\log|\Sigma|)$ e o processo se repete até restar apenas um nó, a complexidade de tempo 
+total do algoritmo é $\mathcal{O}(|\Sigma|\log|\Sigma|)$.
+
+\subsection{Codificação Aritmética}
+Diferentemente da codificação de Huffman, a codificação aritmética não se restringe a atribuição de códigos discretos a
+cada elemento, e sim utiliza a própria probabilidade de ocorrência de cada $s \in \Sigma$. Dessa forma, como não temos
+códigos discretos para cada elemento, calculamos um valor entre $[0, 1]$ para a mensagem toda.
 
 \section{Referências}
 
