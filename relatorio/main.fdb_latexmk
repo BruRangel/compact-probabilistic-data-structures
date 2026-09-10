@@ -1,16 +1,18 @@
 # Fdb version 4
-["biber main"] 0 "main.bcf" "main.bbl" "main" 1788401675.64997 -1
-  "main.bcf" 1788401675.50258 107258 5e5af74c0cdc5f96312a9b0930a1bd9c "pdflatex"
+["biber main"] 1789055265.32195 "main.bcf" "main.bbl" "main" 1789055452.37407 0
+  "main.bcf" 1789055452.23615 107258 5e5af74c0cdc5f96312a9b0930a1bd9c "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1788401673.78205 "/home/bruno_rangel/dev/USP/IC/compact-probabilistic-data-structures/relatorio/main.tex" "main.pdf" "main" 1788401675.65031 0
+["pdflatex"] 1789055450.54255 "/home/bruno_rangel/dev/USP/IC/compact-probabilistic-data-structures/relatorio/main.tex" "main.pdf" "main" 1789055452.37434 0
   "/etc/texmf/web2c/texmf.cnf" 1775654672.40113 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/bruno_rangel/dev/USP/IC/compact-probabilistic-data-structures/relatorio/main.tex" 1788401673.60923 8684 d325a15e711e94f3ce43cd704d3ef300 ""
+  "/home/bruno_rangel/dev/USP/IC/compact-probabilistic-data-structures/relatorio/main.tex" 1789055450.36742 8878 8d75a083aba4155de4d50f420bf390c0 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertinus-type1/lbts_75t36g.enc" 1667852677 3022 13dbae1db4ca7b6d6a3611a22a194cb8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertinus-type1/lbts_nufysp.enc" 1667852677 3020 5d8857a1b98c2fe839d85dd536083a57 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertinus-type1/lbts_sfissr.enc" 1667852677 3016 daaaaf7d4b79d855ad91d510973da2be ""
+  "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertinust1math/libusBB.enc" 1459202234 2276 71c422764d126aeb52aad88f38e03966 ""
+  "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertinust1math/libusBMR.enc" 1643231490 4128 9711ba1fff0e85897faac036165db660 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertinust1math/libusEX.enc" 1459202234 4370 9a6960ad261c3b8505f8616a17a865d2 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertinust1math/libusMI.enc" 1459202234 2466 b4c444f17020acc82bb4a3da32916aa7 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertinust1math/libusMR.enc" 1641157439 3940 bb01245c239dcb8d912830d7c39aa264 ""
@@ -417,11 +419,11 @@
   "imegoodies.sty" 1786146061.52699 53835 44621bb0d3e0d3e120e331b5bff164ca ""
   "imelooks.sty" 1786146061.52699 128666 7c3636dd01ad998352e0e177c8e5f277 ""
   "lstpseudocode.sty" 1786146061.53082 8773 ee54807d51c2d1bcdf9ca65307b1e611 ""
-  "main.aux" 1788401675.49883 1375 452bfe6ad873b7d1e4c33da58e83ec79 "pdflatex"
-  "main.bbl" 1788399220.23187 0 d41d8cd98f00b204e9800998ecf8427e "biber main"
-  "main.out" 1788401675.49883 636 4623d4f560ce71449ede532d5d05962a "pdflatex"
-  "main.run.xml" 1788401675.50258 2291 1f024924d9e78eeed8922ff9cfd2412a "pdflatex"
-  "main.tex" 1788401673.60923 8684 d325a15e711e94f3ce43cd704d3ef300 ""
+  "main.aux" 1789055452.23238 1754 490a86b700d155e84d49516c9a9a2642 "pdflatex"
+  "main.bbl" 1789055265.76737 0 d41d8cd98f00b204e9800998ecf8427e "biber main"
+  "main.out" 1789055452.23238 1157 7b9d3869266f5550149b9aafcdadd61b "pdflatex"
+  "main.run.xml" 1789055452.23615 2291 1f024924d9e78eeed8922ff9cfd2412a "pdflatex"
+  "main.tex" 1789055450.36742 8878 8d75a083aba4155de4d50f420bf390c0 ""
   (generated)
   "main.aux"
   "main.bcf"

@@ -23,6 +23,26 @@ Esse projeto de pesquisa visa estudar os fundamentos de estruturas probabilísti
 incluindo estruturas clássicas da área, suas respectivas vantagens e desvantagens, além de realizar implementações
 para experimentação empírica.
 
+\section{Desigualdades de cauda}
+Algumas desigualdades de cauda serão muito úteis futuramente para essa pesquisa. Dentre elas temos:
+
+\subsection{Desigualdade de Markov}
+Seja $X$ uma variável aleatória não negativa. $\forall a > 0$, temos que:
+
+\[
+\Pr(X \ge a) \le \frac{\mathbb{E}(X)}{a}
+\]
+
+\subsection{Desigualdade de Chebyshev}
+Para qualquer variável aleatória $X$, $\forall a > 0$, temos que:
+
+\[
+    \Pr(|X - \mathbb{E}[X]| \ge a) \le \frac{\mathbf{Var}[X]}{a^2}
+\]
+
+\subsection{Desigualdade de Chernoff}
+A desigualdade de Chernoff nos diz que, para qualquer variável aleatória $X$, 
+
 \section{Entropia}
 A entropia de uma estrutura de dados é o limite mínimo de bits necessários para representar 
 todos os possíveis estados que essa estrutura pode assumir.
@@ -63,8 +83,8 @@ Podemos atribuir o código \texttt{0} para $u_1$, \texttt{10} para $u_2$, \textt
 para $u_4$. Dessa forma, o tamanho médio dos códigos será $0.6 \cdot 1 + 0.2 \cdot 2 + 0.15 \cdot 3 
 + 0.05 \cdot 3 = 1.6$ bits, o que é próximo da entropia mínima e menor que o pior caso.
 
-É importante que a codificação seja livre de prefixos, ou seja, nenhum código pode ser prefixo de outro, caso
-contrário, será impossível realizar a decodificação sem ambiguidades. Os códigos escolhidos acima foram gerados
+Codificações livres de prefixo, isso é, onde nenhum código é prefixo de outro, podem ser decodificadas
+imediatamente sem a necessidade de separadores. Os códigos acima são livres de prefixo e foram gerados
 utilizando a \textbf{codificação de Huffman}.
 
 \subsection{Codificação de Huffman}
@@ -149,11 +169,6 @@ pelas probabilidades. A cada iteração, extraímos os dois nós de peso mínimo
 de suas probabilidades e o reinserimos na fila. Como cada operação de extração e inserção na fila de prioridade 
 tem custo $\mathcal{O}(\log|\Sigma|)$ e o processo se repete até restar apenas um nó, a complexidade de tempo 
 total do algoritmo é $\mathcal{O}(|\Sigma|\log|\Sigma|)$.
-
-\subsection{Codificação Aritmética}
-Diferentemente da codificação de Huffman, a codificação aritmética não se restringe a atribuição de códigos discretos a
-cada elemento, e sim utiliza a própria probabilidade de ocorrência de cada $s \in \Sigma$. Dessa forma, como não temos
-códigos discretos para cada elemento, calculamos um valor entre $[0, 1]$ para a mensagem toda.
 
 \section{Referências}
 
