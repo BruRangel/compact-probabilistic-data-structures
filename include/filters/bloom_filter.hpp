@@ -28,6 +28,8 @@ public:
     );
     void insert(const Key &key);
     bool probably_contains(const Key &key) const;
+    std::size_t bit_count() const;
+    std::size_t hash_count() const;
 };
 
 #include "bloom_filter.tpp"

@@ -34,6 +34,8 @@ int main()
     const double true_false_positive_rate = static_cast<double>(n_false_positives) / limit;
 
     std::cout << "Inserted keys: " << n << '\n';
+    std::cout << "Number of bits on the bit vector: " << filter.bit_count() << "\n";
+    std::cout << "Number of hash functions: " << filter.hash_count() << "\n";
     std::cout << "Number of false negatives: " << false_negatives << '\n';
     std::cout << "Absent keys tested: " << limit << '\n';
     std::cout << "Number of false positives: " << n_false_positives << '\n';

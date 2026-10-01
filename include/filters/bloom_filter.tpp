@@ -59,3 +59,13 @@ bool bloom_filter<Key, Hash>::probably_contains(const Key &key) const
 
     return true;
 }
+
+template<class Key, class Hash>
+std::size_t bloom_filter<Key, Hash>::bit_count() const {
+    return this->number_of_bits;
+}
+
+template<class Key, class Hash>
+std::size_t bloom_filter<Key, Hash>::hash_count() const {
+    return this->number_of_hash_functions;
+}
