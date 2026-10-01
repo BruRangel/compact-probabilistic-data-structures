@@ -16,6 +16,7 @@ Ao final do semestre, espera-se que o aluno tenha construído repertório sufici
 # Cronograma
 
 O cronograma de estudos foi planejado semanalmente, buscando gastar 6 horas por semana para o estudo de diferentes tópicos.
+
 ## Agosto
 6 horas por semana, totalizando 24 horas.
 
@@ -37,6 +38,7 @@ Semana 6(07/09 a 13/09): Estudo da técnica de quotienting, utilizada em outra v
 Semana 7 (14/09 a 20/09): Implementações em C++ de Bloom Filters, XOR Filters e Skip-Lists.
 
 Semana 8 (21/09 a 27/09): Implementações de Cuckoo Filters e Quotient Filters
+
 ## Outubro
 6 horas por semana, totalizando 30 horas
 

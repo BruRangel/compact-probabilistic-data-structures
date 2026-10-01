@@ -1,9 +1,10 @@
+#pragma once
 #include <algorithm>
 #include <cmath>
 #include "bloom_filter.hpp"
 
-template<class Key, class Hasher>
-bloom_filter<Key, Hasher>::bloom_filter(
+template<class Key, class Hash>
+bloom_filter<Key, Hash>::bloom_filter(
     std::size_t n,
     double p
 ) : number_of_expected_elements(n), target_false_positive_rate(p)
@@ -25,10 +26,10 @@ bloom_filter<Key, Hasher>::bloom_filter(
     );
 }
 
-template<class Key, class Hasher>
-void bloom_filter<Key, Hasher>::insert(const Key &key)
+template<class Key, class Hash>
+void bloom_filter<Key, Hash>::insert(const Key &key)
 {
-    const auto hashes = this->hasher(key);
+    const auto hashes = this->hash_function(key);
 
     // Use double-hashing to emulate k-hashes
     // for each hash, marks the corresponding position as 1/true
@@ -40,17 +41,21 @@ void bloom_filter<Key, Hasher>::insert(const Key &key)
     }
 }
 
-template<class Key, class Hasher>
-void bloom_filter<Key, Hasher>::probably_contains(const Key &key) const
+template<class Key, class Hash>
+bool bloom_filter<Key, Hash>::probably_contains(const Key &key) const
 {
-    const auto hashes = this->hasher(key);
+    const auto hashes = this->hash_function(key);
 
     // Use double-hashing to emulate k-hashes
-    // for each hash, marks the corresponding position as 1/true
+    // Verifies if every bit is was setted true
     for (std::size_t i = 0; i < this->number_of_hash_functions; ++i) {
         const auto pos = (hashes.first + i * hashes.second) 
         % this->number_of_bits;
 
-        this->bit_vector[pos] = true;
+        if (!this->bit_vector[pos]) {
+            return false;
+        }
     }
+
+    return true;
 }

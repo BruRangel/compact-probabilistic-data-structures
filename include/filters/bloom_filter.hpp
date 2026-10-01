@@ -1,5 +1,4 @@
 #pragma once
-
 #include <vector>
 #include <cstddef>
 
@@ -8,7 +7,7 @@
 
 // This template lets the user choose the key type and 
 // the hash function to be used on the filter.
-template<class Key, class Hasher>
+template<class Key, class Hash>
 class bloom_filter {
 private:
     std::vector<bool> bit_vector;
@@ -16,7 +15,7 @@ private:
     std::size_t number_of_expected_elements;
     std::size_t number_of_hash_functions;
     double target_false_positive_rate;
-    Hasher hasher;
+    Hash hash_function;
 
 public:
     // To create a bloom filter is needed the number of expected elements
