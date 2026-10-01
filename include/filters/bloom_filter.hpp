@@ -2,8 +2,8 @@
 #include <vector>
 #include <cstddef>
 
-// size of the bit vector == m = -\frac{n \ln(p)}{(\ln(2))^2}
-// number of hash functions == k = \frac{m}{n}\ln(2)
+// size of the bit vector == n = -\frac{m \ln(f)}{(\ln(2))^2}
+// number of hash functions == k = \frac{n}{m}\ln(2)
 
 // This template lets the user choose the key type and 
 // the hash function to be used on the filter.
